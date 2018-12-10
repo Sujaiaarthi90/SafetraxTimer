@@ -5,4 +5,5 @@
     <color name="colorPrimaryExtraDark">#57712a</color>
     <color name="colorAccent">#ff2068</color>
     <color name="bg_white">#FFFFFF</color>
+    <color name="tab_text_grey">#666666</color>
 </resources>
