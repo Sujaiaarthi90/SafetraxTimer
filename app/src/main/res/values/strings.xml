@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SafetraxTimer</string>
+    <string name="version_title">Version :</string>
 </resources>
