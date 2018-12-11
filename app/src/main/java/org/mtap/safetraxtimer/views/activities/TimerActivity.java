@@ -1,5 +1,6 @@
 package org.mtap.safetraxtimer.views.activities;
 
+import android.os.StrictMode;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,10 +12,12 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.apache.commons.net.time.TimeTCPClient;
 import org.mtap.safetraxtimer.R;
 import org.mtap.safetraxtimer.views.fragments.NormalTimeFragment;
 import org.mtap.safetraxtimer.views.fragments.RailwayTimeFragment;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,12 +27,14 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 public class TimerActivity extends AppCompatActivity {
 
     public static final String RAILWAY_TIME_FORMAT = "EEEE, dd MMM, yyyy HH:mm:ss";
 
     public static final String NORMAL_TIME_FORMAT = "EEEE, dd MMM, yyyy hh:mm aa";
 
+    public static long TIME;
     @BindView(R.id.tabs)
     TabLayout tabLayout;
 
@@ -140,5 +145,25 @@ public class TimerActivity extends AppCompatActivity {
         String date = month_date.format(cal.getTime()).toString();
         System.out.println(date);
         return date;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            TimeTCPClient client = new TimeTCPClient();
+            try {
+                client.setDefaultTimeout(60000);
+                client.connect("time.nist.gov");
+                TIME = client.getDate().getTime();
+            } finally {
+                client.disconnect();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
