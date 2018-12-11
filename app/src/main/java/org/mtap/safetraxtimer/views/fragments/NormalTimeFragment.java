@@ -6,19 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import org.mtap.safetraxtimer.R;
+import org.mtap.safetraxtimer.utils.DateUtils;
 import org.mtap.safetraxtimer.views.activities.TimerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static org.mtap.safetraxtimer.views.activities.TimerActivity.NORMAL_TIME_FORMAT;
-import static org.mtap.safetraxtimer.views.activities.TimerActivity.TIME;
-import static org.mtap.safetraxtimer.views.activities.TimerActivity.getDate;
 
 public class NormalTimeFragment extends Fragment {
 
@@ -45,8 +41,8 @@ public class NormalTimeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (current_date_view != null)
-            if (TIME != 0)
-                current_date_view.setText(getDate(TIME, NORMAL_TIME_FORMAT));
+            if (DateUtils.TIME != 0)
+                current_date_view.setText(DateUtils.getDate(DateUtils.TIME, DateUtils.NORMAL_TIME_FORMAT));
             else
                 current_date_view.setText(getContext().getResources().getString(R.string.get_time_error));
 

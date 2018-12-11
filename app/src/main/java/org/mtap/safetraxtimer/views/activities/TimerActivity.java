@@ -12,29 +12,19 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.apache.commons.net.time.TimeTCPClient;
 import org.mtap.safetraxtimer.R;
+import org.mtap.safetraxtimer.utils.DateUtils;
 import org.mtap.safetraxtimer.views.fragments.NormalTimeFragment;
 import org.mtap.safetraxtimer.views.fragments.RailwayTimeFragment;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 public class TimerActivity extends AppCompatActivity {
 
-    public static final String RAILWAY_TIME_FORMAT = "EEEE, dd MMM, yyyy HH:mm:ss";
-
-    public static final String NORMAL_TIME_FORMAT = "EEEE, dd MMM, yyyy hh:mm aa";
-
-    public static long TIME;
     @BindView(R.id.tabs)
     TabLayout tabLayout;
 
@@ -155,32 +145,11 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
-    public static String getDate(long time, String timeFormat) {
-        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(time);
-        SimpleDateFormat month_date = new SimpleDateFormat(timeFormat);
-        String date = month_date.format(cal.getTime()).toString();
-        System.out.println(date);
-        return date;
-    }
+
 
     @Override
     public void onResume() {
         super.onResume();
-        try {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-
-            TimeTCPClient client = new TimeTCPClient();
-            try {
-                client.setDefaultTimeout(60000);
-                client.connect("time.nist.gov");
-                TIME = client.getDate().getTime();
-            } finally {
-                client.disconnect();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        DateUtils.TIME = DateUtils.getTIME();
     }
 }
