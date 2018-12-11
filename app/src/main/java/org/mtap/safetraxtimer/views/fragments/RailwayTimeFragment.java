@@ -19,7 +19,7 @@ import butterknife.OnClick;
 public class RailwayTimeFragment extends Fragment {
 
     @BindView(R.id.current_date_view)
-    TextView current_date_view;
+    TextView currentDateView;
 
     public RailwayTimeFragment() {
     }
@@ -41,11 +41,11 @@ public class RailwayTimeFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if (current_date_view != null)
-            if (DateUtils.TIME != 0)
-                current_date_view.setText(DateUtils.getDate(DateUtils.TIME, DateUtils.RAILWAY_TIME_FORMAT));
+        if (currentDateView != null)
+            if (DateUtils.sTime != 0)
+                currentDateView.setText(DateUtils.getDate(DateUtils.sTime, DateUtils.RAILWAY_TIME_FORMAT));
             else
-                current_date_view.setText(getContext().getResources().getString(R.string.get_time_error));
+                currentDateView.setText(getContext().getResources().getString(R.string.get_time_error));
 
     }
 }

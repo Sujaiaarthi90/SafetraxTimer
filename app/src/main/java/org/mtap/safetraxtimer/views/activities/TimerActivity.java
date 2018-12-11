@@ -1,6 +1,5 @@
 package org.mtap.safetraxtimer.views.activities;
 
-import android.os.StrictMode;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -150,6 +149,6 @@ public class TimerActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        DateUtils.TIME = DateUtils.getTIME();
+        DateUtils.sTime = DateUtils.getsTime();
     }
 }

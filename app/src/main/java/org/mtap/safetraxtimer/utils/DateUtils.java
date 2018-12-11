@@ -15,7 +15,7 @@ public class DateUtils {
 
     public static final String NORMAL_TIME_FORMAT = "EEEE, dd MMM, yyyy hh:mm aa";
 
-    public static long TIME;
+    public static long sTime;
 
     public static String getDate(long time, String timeFormat) {
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
@@ -26,7 +26,7 @@ public class DateUtils {
         return date;
     }
 
-    public static long getTIME() {
+    public static long getsTime() {
         long time = 0;
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
