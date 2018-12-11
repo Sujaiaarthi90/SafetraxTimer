@@ -45,7 +45,10 @@ public class RailwayTimeFragment extends Fragment {
         super.onResume();
 
         if (current_date_view != null)
-            current_date_view.setText(getDate(TIME, RAILWAY_TIME_FORMAT));
+            if (TIME != 0)
+                current_date_view.setText(getDate(TIME, RAILWAY_TIME_FORMAT));
+            else
+                current_date_view.setText(getContext().getResources().getString(R.string.get_time_error));
 
     }
 }

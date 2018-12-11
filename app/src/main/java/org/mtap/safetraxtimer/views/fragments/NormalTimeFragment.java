@@ -34,6 +34,7 @@ public class NormalTimeFragment extends Fragment {
         ButterKnife.bind(this, view);
         return view;
     }
+
     @OnClick(R.id.current_time_button)
     public void onGetCurrentTimetClick(View view) {
         ((TimerActivity) getContext()).onResume();
@@ -44,6 +45,11 @@ public class NormalTimeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (current_date_view != null)
-            current_date_view.setText(getDate(TIME, NORMAL_TIME_FORMAT));
+            if (TIME != 0)
+                current_date_view.setText(getDate(TIME, NORMAL_TIME_FORMAT));
+            else
+                current_date_view.setText(getContext().getResources().getString(R.string.get_time_error));
+
+
     }
 }

@@ -103,10 +103,27 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new NormalTimeFragment(), getResources().getString(R.string.normal_time));
         adapter.addFrag(new RailwayTimeFragment(), getResources().getString(R.string.railway_time));
         viewPager.setAdapter(adapter);
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+//                onResume();
+                adapter.getItem(position).onResume();
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+            }
+        });
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
