@@ -9,12 +9,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.mtap.safetraxtimer.R;
+import org.mtap.safetraxtimer.views.activities.TimerActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static org.mtap.safetraxtimer.views.activities.TimerActivity.RAILWAY_TIME_FORMAT;
 import static org.mtap.safetraxtimer.views.activities.TimerActivity.TIME;
 import static org.mtap.safetraxtimer.views.activities.TimerActivity.getDate;
 
 public class RailwayTimeFragment extends Fragment {
+
+    @BindView(R.id.current_date_view)
     TextView current_date_view;
 
     public RailwayTimeFragment() {
@@ -23,8 +30,14 @@ public class RailwayTimeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_normal_time, container, false);
-        current_date_view = view.findViewById(R.id.current_date_view);
+        ButterKnife.bind(this, view);
         return view;
+    }
+
+    @OnClick(R.id.current_time_button)
+    public void onGetCurrentTimetClick(View view) {
+        ((TimerActivity) getContext()).onResume();
+        onResume();
     }
 
     @Override

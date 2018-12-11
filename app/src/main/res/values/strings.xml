@@ -3,4 +3,5 @@
     <string name="version_title">Version :</string>
     <string name="normal_time">Normal Timing</string>
     <string name="railway_time">Railway Timing</string>
+    <string name="get_current_time">Get Current Time</string>
 </resources>
